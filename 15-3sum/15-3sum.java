@@ -3,54 +3,54 @@ class Solution {
 
 		Arrays.sort(nums);
 
-		List<List<Integer>> myResult = new ArrayList<>();
+		List<List<Integer>> result = new ArrayList<>();
 
 		for (int i = 0; i < nums.length - 2; i++) {
-			
-			if(i!=0 && nums[i-1] == nums[i]) {
-				continue;
-			}
-			
 
-			int low = i + 1;
+			if (i == 0 || nums[i] != nums[i - 1]) {
 
-			int high = nums.length - 1;
+				int target = 0 - nums[i];
 
-			int target = 0 - (nums[i]);
+				int left = i + 1;
+				int right = nums.length - 1;
 
-			while (low < high) {
+				while (left < right) {
 
-				if (nums[low] + nums[high] == target) {
+					int sum = nums[left] + nums[right];
 
-					List<Integer> row = new ArrayList<>();
+					if (sum == target) {
 
-					row.add(nums[i]);
-					row.add(nums[low]);
-					row.add(nums[high]);
+						List<Integer> triplet = new ArrayList<>();
+						triplet.add(nums[i]);
+						triplet.add(nums[left]);
+						triplet.add(nums[right]);
 
-					myResult.add(row);
+						result.add(triplet);
 
-					while (low < high && nums[low] == nums[low + 1]) {
-						low++;
+						while (left < right && nums[left] == nums[left + 1])
+							left++;
+						while (left < right && nums[right] == nums[right - 1])
+							right--;
+
+						right--;
+						left++;
 					}
-					low++;
 
-					while (low < high && nums[high] == nums[high - 1]) {
-						high--;
+					else if (sum > target) {
+						right--;
 					}
-					high--;
 
-				} else if (nums[low] + nums[high] > target) {
-					high--;
-				} else {
-					low++;
+					else {
+						left++;
+					}
+
 				}
 
 			}
 
 		}
 
-		return myResult;
+		return result;
 
 	}
 }
