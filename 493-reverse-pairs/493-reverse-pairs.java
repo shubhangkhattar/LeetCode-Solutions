@@ -58,7 +58,7 @@ class Solution {
 
 	int mergeSort(int[] nums, int low, int high) {
 
-		if (low >= high) {
+		if (low == high) {
 			return 0;
 		}
 
