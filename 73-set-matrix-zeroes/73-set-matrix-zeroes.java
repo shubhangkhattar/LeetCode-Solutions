@@ -1,43 +1,36 @@
 class Solution {
-
-	int[][] visited;
-
 	public void setZeroes(int[][] matrix) {
 
-		boolean col = true;
+		boolean[] column = new boolean[matrix[0].length];
+		boolean[] row = new boolean[matrix.length];
 
-		for (int i = 0; i < matrix.length; i++) {
-			for (int j = 0; j < matrix[0].length; j++) {
+		int r = matrix.length;
+		int c = matrix[0].length;
 
-				if (j == 0 && matrix[i][j] == 0) {
-					col = false;
-				} else if (matrix[i][j] == 0) {
-					matrix[0][j] = 0;
-					matrix[i][0] = 0;
+		for (int i = 0; i < r; i++) {
+			for (int j = 0; j < c; j++) {
+
+				if (matrix[i][j] == 0) {
+					column[j] = true;
+					row[i] = true;
+
 				}
 
 			}
+
 		}
 
-		for (int i = matrix.length - 1; i >= 0; i--) {
-			for (int j = matrix[0].length - 1; j > 0; j--) {
+		for (int i = 0; i < r; i++) {
+			for (int j = 0; j < c; j++) {
 
-				if (matrix[i][0] == 0 || matrix[0][j] == 0) {
+				if (column[j] == true || row[i] == true) {
 					matrix[i][j] = 0;
+
 				}
-
-			}
-		}
-
-		if (!col == true) {
-
-			for (int i = 0; i < matrix.length; i++) {
-				matrix[i][0] = 0;
 
 			}
 
 		}
 
 	}
-
 }
