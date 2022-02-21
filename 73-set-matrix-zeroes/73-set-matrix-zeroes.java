@@ -1,8 +1,7 @@
 class Solution {
 	public void setZeroes(int[][] matrix) {
 
-		boolean[] column = new boolean[matrix[0].length];
-		boolean[] row = new boolean[matrix.length];
+		boolean top = true;
 
 		int r = matrix.length;
 		int c = matrix[0].length;
@@ -10,9 +9,11 @@ class Solution {
 		for (int i = 0; i < r; i++) {
 			for (int j = 0; j < c; j++) {
 
-				if (matrix[i][j] == 0) {
-					column[j] = true;
-					row[i] = true;
+				if (j == 0 && matrix[i][j] == 0) {
+					top = false;
+				} else if (matrix[i][j] == 0) {
+					matrix[0][j] = 0;
+					matrix[i][0] = 0;
 
 				}
 
@@ -20,13 +21,22 @@ class Solution {
 
 		}
 
-		for (int i = 0; i < r; i++) {
-			for (int j = 0; j < c; j++) {
+		for (int i = r-1; i >= 0; i--) {
+			for (int j = c-1; j > 0; j--) {
 
-				if (column[j] == true || row[i] == true) {
+				if (matrix[0][j] == 0 || matrix[i][0] == 0) {
 					matrix[i][j] = 0;
 
 				}
+
+			}
+
+		}
+
+		if (!top) {
+
+			for (int i = 0; i < r; i++) {
+				matrix[i][0] = 0;
 
 			}
 
