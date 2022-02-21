@@ -3,56 +3,54 @@ class Solution {
 
 		Arrays.sort(nums);
 
-		Set<List<Integer>> mySet = new HashSet<>();
+		List<List<Integer>> myResult = new ArrayList<>();
 
-		for (int i = 0; i < nums.length-2; i++) {
+		for (int i = 0; i < nums.length - 2; i++) {
+			
+			if(i!=0 && nums[i-1] == nums[i]) {
+				continue;
+			}
 			
 
+			int low = i + 1;
 
-			int target = 0 - nums[i];
+			int high = nums.length - 1;
 
-			int left = i + 1;
-			int right = nums.length - 1;
-			
-			
+			int target = 0 - (nums[i]);
 
-			while (left < right) {
-				
+			while (low < high) {
 
-				int sum = nums[left] + nums[right];
+				if (nums[low] + nums[high] == target) {
 
-				if (sum == target) {
+					List<Integer> row = new ArrayList<>();
 
-					List<Integer> triplet = new ArrayList<>();
-					triplet.add(nums[i]);
-					triplet.add(nums[left]);
-					triplet.add(nums[right]);
+					row.add(nums[i]);
+					row.add(nums[low]);
+					row.add(nums[high]);
 
-					mySet.add(triplet);
+					myResult.add(row);
 
-					right--;
-					left++;
-				}
+					while (low < high && nums[low] == nums[low + 1]) {
+						low++;
+					}
+					low++;
 
-				else if (sum > target) {
-					right--;
-				}
+					while (low < high && nums[high] == nums[high - 1]) {
+						high--;
+					}
+					high--;
 
-				else {
-					left++;
+				} else if (nums[low] + nums[high] > target) {
+					high--;
+				} else {
+					low++;
 				}
 
 			}
 
 		}
 
-		List<List<Integer>> result = new ArrayList<>();
-
-		for (List<Integer> triplet : mySet) {
-			result.add(triplet);
-		}
-
-		return result;
+		return myResult;
 
 	}
 }
