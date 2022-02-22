@@ -1,64 +1,43 @@
 class Solution {
 	public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
 
-		ListNode dummy = new ListNode();
-        
-        if(l1 == null){
-            return l2;
-        }
-        
-          if(l2 == null){
-            return l1;
-        }
-        
-        
+		if (l1 == null || l2 == null)
+			return l1 == null ? l2 : l1;
+
+		ListNode newHead;
+		ListNode prev;
 
 		ListNode c1 = l1;
 		ListNode c2 = l2;
+		
+		
 
-		if (c1.val < c2.val) {
-			dummy.val = c1.val;
-			c1 = c1.next;
-		} else {
-			dummy.val = c2.val;
-			c2 = c2.next;
-		}
+		newHead = c1.val < c2.val ? c1 : c2;
 
-		ListNode newHead = dummy;
+		prev = new ListNode();
 
+		
 		while (c1 != null && c2 != null) {
 
-			dummy.next = new ListNode();
-			dummy = dummy.next;
-
 			if (c1.val < c2.val) {
-				dummy.val = c1.val;
+				prev.next = c1;
+				prev = c1;
 				c1 = c1.next;
+
 			} else {
-				dummy.val = c2.val;
+
+				prev.next = c2;
+				prev = c2;
 				c2 = c2.next;
+
 			}
 
 		}
 
-		while (c1 != null) {
-
-			dummy.next = new ListNode();
-			dummy = dummy.next;
-
-			dummy.val = c1.val;
-			c1 = c1.next;
-
-		}
-		
-		while (c2 != null) {
-
-			dummy.next = new ListNode();
-			dummy = dummy.next;
-
-			dummy.val = c2.val;
-			c2 = c2.next;
-
+		if(c1 == null) {
+			prev.next = c2;
+		} else {
+			prev.next = c1;
 		}
 
 		return newHead;
