@@ -42,44 +42,48 @@ class GfG {
 
 
 class Solution {
-   // return an array of size 2 having the 0th element equal to the count
-   // and 1st element equal to the maximum profit
-   int[] JobScheduling(Job arr[], int n) {
-      Arrays.sort(arr, (a, b) -> (b.profit - a.profit));
+	// Function to find the maximum profit and the number of jobs done.
+	int[] JobScheduling(Job arr[], int n) {
 
-      int maxi = 0;
-      for (int i = 0; i < n; i++) {
-         if (arr[i].deadline > maxi) {
-            maxi = arr[i].deadline;
-         }
-      }
+		Arrays.sort(arr, (a, b) -> (b.profit - a.profit));
 
-      int result[] = new int[maxi + 1];
+		int max = 0;
 
-      for (int i = 1; i <= maxi; i++) {
-         result[i] = -1;
-      }
+		for (int i = 0; i < arr.length; i++) {
+			max = Math.max(max, arr[i].deadline);
+		}
 
-      int countJobs = 0, jobProfit = 0;
+		int result[] = new int[max + 1];
 
-      for (int i = 0; i < n; i++) {
+		for (int i = 0; i <= max; i++) {
+			result[i] = -1;
+		}
 
-         for (int j = arr[i].deadline; j > 0; j--) {
+		int countJob = 0;
+		int jobProfit = 0;
 
-            // Free slot found 
-            if (result[j] == -1) {
-               result[j] = i;
-               countJobs++;
-               jobProfit += arr[i].profit;
-               break;
-            }
-         }
-      }
+		for (int i = 0; i < arr.length; i++) {
 
-      int ans[] = new int[2];
-      ans[0] = countJobs;
-      ans[1] = jobProfit;
-      return ans;
+			for (int j = arr[i].deadline; j > 0; j--) {
 
-   }
+				if (result[j] == -1) {
+
+					result[j] = i;
+					countJob++;
+					jobProfit += arr[i].profit;
+					break;
+
+				}
+
+			}
+
+		}
+
+		int[] ans = new int[2];
+		ans[0] = countJob;
+		ans[1] = jobProfit;
+
+		return ans;
+
+	}
 }
