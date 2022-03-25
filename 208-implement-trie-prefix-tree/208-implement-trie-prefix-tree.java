@@ -1,13 +1,14 @@
 class Node {
 
 	Node links[] = new Node[26];
+
 	boolean flag = false;
 
-	public boolean containes_key(char ch) {
+	public boolean containsKey(char ch) {
 		return links[ch - 'a'] != null;
 	}
 
-	public Node get(char ch) {
+	public Node get(Character ch) {
 		return links[ch - 'a'];
 	}
 
@@ -27,11 +28,10 @@ class Node {
 
 class Trie {
 
-	private Node root;
+	Node root;
 
 	public Trie() {
 		root = new Node();
-
 	}
 
 	public void insert(String word) {
@@ -40,7 +40,7 @@ class Trie {
 
 		for (int i = 0; i < word.length(); i++) {
 
-			if (!node.containes_key(word.charAt(i))) {
+			if (!node.containsKey(word.charAt(i))) {
 
 				node.put(word.charAt(i), new Node());
 
@@ -60,7 +60,7 @@ class Trie {
 
 		for (int i = 0; i < word.length(); i++) {
 
-			if (!node.containes_key(word.charAt(i))) {
+			if (!node.containsKey(word.charAt(i))) {
 
 				return false;
 
@@ -80,7 +80,7 @@ class Trie {
 
 		for (int i = 0; i < prefix.length(); i++) {
 
-			if (!node.containes_key(prefix.charAt(i))) {
+			if (!node.containsKey(prefix.charAt(i))) {
 
 				return false;
 
@@ -91,6 +91,11 @@ class Trie {
 		}
 
 		return true;
-
 	}
 }
+
+/**
+ * Your Trie object will be instantiated and called as such: Trie obj = new
+ * Trie(); obj.insert(word); boolean param_2 = obj.search(word); boolean param_3
+ * = obj.startsWith(prefix);
+ */
