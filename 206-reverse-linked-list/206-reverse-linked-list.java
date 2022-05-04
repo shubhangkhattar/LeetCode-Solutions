@@ -11,7 +11,7 @@ class Solution {
 			head = next;
 
 		}
-
+		
 		return newHead;
 
 	}
