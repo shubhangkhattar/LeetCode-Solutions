@@ -3,14 +3,13 @@ class Solution {
 
 		int i = 0;
 		int j = 1;
-		
-		if(nums.length == 0) {
-			return 0;
+
+		if (nums.length <= 1) {
+			return nums.length;
 		}
 
 		while (j < nums.length) {
-
-			if (nums[i] == nums[j]) {
+			if (nums[j] == nums[i]) {
 				j++;
 				continue;
 			}
@@ -18,9 +17,8 @@ class Solution {
 			i++;
 
 			nums[i] = nums[j];
-
 		}
-		
+
 		return ++i;
 
 	}
