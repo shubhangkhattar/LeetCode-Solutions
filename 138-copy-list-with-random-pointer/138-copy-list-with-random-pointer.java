@@ -1,42 +1,29 @@
 class Solution {
 	public Node copyRandomList(Node head) {
 
-		Node iter = head;
-		Node front = head;
-		Node copy;
+		Map<Node, Node> myMap = new HashMap<>();
 
-		while (iter != null) {
-			front = iter.next;
-			copy = new Node(iter.val);
-			iter.next = copy;
-			copy.next = front;
-			iter = front;
+		Node cur = head;
+
+		while (cur != null) {
+			myMap.put(cur, new Node(cur.val));
+			cur = cur.next;
+		}
+
+		cur = head;
+
+		while (cur != null) {
+
+			Node temp = myMap.get(cur);
+			Node next = myMap.get(cur.next);
+			Node random = myMap.get(cur.random);
+			temp.next = next;
+			temp.random = random;
+			cur = cur.next;
 
 		}
 
-		iter = head;
-
-		while (iter != null) {
-			if (iter.random != null) {
-				iter.next.random = iter.random.next;
-			}
-
-			iter = iter.next.next;
-		}
-
-		iter = head;
-		Node pseudoHead = new Node(0);
-		copy = pseudoHead;
-
-		while (iter != null) {
-			front = iter.next.next;
-			copy.next = iter.next;
-			iter.next = front;
-			copy = copy.next;
-			iter = iter.next;
-		}
-
-		return pseudoHead.next;
+		return myMap.get(head);
 
 	}
 }
