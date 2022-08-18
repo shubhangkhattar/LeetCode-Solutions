@@ -7,13 +7,10 @@ class Solution {
 			heap.add(nums[i]);
 		}
 
-		int f = k - 1;
-
-		while (f > 0) {
+		for (int i = 1; i < k; i++) {
 			heap.poll();
-			f--;
 		}
-
+		
 		return heap.peek();
 
 	}
