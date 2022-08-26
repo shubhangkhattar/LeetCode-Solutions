@@ -23,6 +23,7 @@ class Solution {
 			int digit = s.charAt(ind) - '0';
 
 			if (result > maxLimit || result == maxLimit && digit > 7)
+                //https://youtu.be/z4YsWX0hT1A?t=460
 			{
 				return isNegative ? Integer.MIN_VALUE : Integer.MAX_VALUE;
 			}
