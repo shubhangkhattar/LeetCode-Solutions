@@ -39,8 +39,6 @@ class Solution(object):
         min_count = len(nums)//3 + 1
         result = []
 
-        print(min_count)
-
         if count_1 >= min_count:
             result.append(element_1)
         if count_2 >= min_count:
