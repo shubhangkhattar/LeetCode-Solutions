@@ -10,6 +10,7 @@ class Solution:
         for course, p in prerequisites:
             pre[course].append(p)
 
+
         def dfs(course):
             if not pre[course]:
                 return True
