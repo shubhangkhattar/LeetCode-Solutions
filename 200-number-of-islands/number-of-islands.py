@@ -1,3 +1,6 @@
+from typing import List
+
+
 class Solution:
 
     def dfs(self, i, j, grid, visited):
@@ -18,6 +21,8 @@ class Solution:
 
     def numIslands(self, grid: List[List[str]]) -> int:
         visited = [["0"]*len(grid[0]) for i in grid]
+        # visited = [["0"] * len(grid[0])]*len(grid)
+        print(visited)
         count = 0
         for i in range(len(grid)):
             for j in range(len(grid[0])):
