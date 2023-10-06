@@ -13,7 +13,6 @@ class Solution:
         def dfs(node):
             if node in my_map:
                 return my_map[node]
-            print(node)
             new_node = Node(node.val)
             my_map[node] = new_node
 
