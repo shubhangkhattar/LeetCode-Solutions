@@ -5,7 +5,6 @@ class Solution:
         return result
 
     def dfs(self, index, candidates, target, current_list, result):
-        print(current_list)
         if sum(current_list) == target:
             result.append(current_list)
             return
