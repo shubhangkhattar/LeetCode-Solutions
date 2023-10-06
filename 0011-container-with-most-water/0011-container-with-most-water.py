@@ -6,8 +6,8 @@ class Solution:
         max_vol = 0
         while left < right:
             min_height = min(height[left],height[right])
-            min_width = right - left
-            volume = min_width * min_height
+            width = right - left
+            volume = width * min_height
             max_vol = max(volume,max_vol)
             
             if height[left] < height[right]:
