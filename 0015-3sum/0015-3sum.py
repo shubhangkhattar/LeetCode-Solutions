@@ -4,20 +4,26 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[List[int]]
         """
-        result = set()
 
+        res = []
         nums.sort()
-        n = len(nums)
-        for i in range(0, n - 2):
 
-            left = i + 1
-            right = n - 1
-
-            while left < right:
-                if nums[left] + nums[right] == -nums[i]:
-                    result.add((nums[i], nums[left], nums[right]))
-                if -nums[i] < (nums[left] + nums[right]):
-                    right -= 1
+        for i, a in enumerate(nums):
+            if i > 0 and a == nums[i - 1]:
+                continue
+            l, r = i + 1, len(nums) - 1
+            while l < r:
+                sum = nums[l] + nums[r]
+                if sum == -a:
+                    res.append([a, nums[l], nums[r]])
+                    while l < r and nums[l] == nums[l+1]:
+                        l += 1
+                        continue
+                if -a < sum:
+                    r -= 1
                 else:
-                    left += 1
-        return list(result)
+                    l += 1
+        
+
+        return res
+
