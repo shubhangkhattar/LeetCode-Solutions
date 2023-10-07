@@ -1,33 +1,24 @@
-from typing import List
-
-
 class Solution:
-
-    def dfs(self, i, j, grid, visited):
-        if grid[i][j] != "1" or visited[i][j] == "1":
-            return
-
-        visited[i][j] = "1"
-
-        if i+1 < len(grid):
-            self.dfs(i+1,j,grid,visited)
-        if i-1 >= 0:
-            self.dfs(i - 1, j, grid, visited)
-        if j + 1 < len(grid[0]):
-            self.dfs(i, j+1, grid, visited)
-        if j - 1 >= 0:
-            self.dfs(i, j-1, grid, visited)
-
-
     def numIslands(self, grid: List[List[str]]) -> int:
-        visited = [["0"]*len(grid[0]) for i in grid]
-        # visited = [["0"] * len(grid[0])]*len(grid)
-        print(visited)
-        count = 0
-        for i in range(len(grid)):
-            for j in range(len(grid[0])):
-                if (grid[i][j] == "1") and (visited[i][j] == "0"):
-                    count += 1
-                    self.dfs(i,j,grid,visited)
+        visited = [[-1]*len(grid[0]) for i in range(len(grid))]
+        ROWS, COLS = len(grid) , len(grid[0])
+ 
+        def dfs(r,c):
+            if r < 0 or c < 0 or r == ROWS or c == COLS or grid[r][c] == "0" or visited[r][c] == 1:
+                return
+            visited[r][c] = 1
+            
+            dfs(r-1,c)
+            dfs(r+1,c)
+            dfs(r,c-1)
+            dfs(r,c+1)
 
-        return count
+        ans = 0
+        print()
+        for r in range(ROWS):
+            for c in range(COLS):
+                if grid[r][c] == "1" and visited[r][c] == -1:
+                    ans +=1
+                    dfs(r,c)
+
+        return ans
