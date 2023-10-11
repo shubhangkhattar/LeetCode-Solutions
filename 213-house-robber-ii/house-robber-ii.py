@@ -5,17 +5,15 @@ class Solution:
         if len(nums) == 1:
             return nums[0]
         return max(self.robber_1(nums[:-1]),self.robber_1(nums[1:]))
-        
+
+
     def robber_1(self, nums: List[int]) -> int:
-        rob_1, rob_2 = 0,0
+        rob1, rob2 = 0,0
 
-        for n in nums:
-            temp = max(n+rob_1,rob_2)
-            rob_1 = rob_2
-            rob_2 = temp
+        for num in nums:
+            rob1, rob2 =  rob2, max(rob2,rob1+num) 
 
-        return rob_2
-
+        return rob2
 
 
 
