@@ -8,7 +8,7 @@ class Solution:
                 if text1[i-1] == text2[j-1]:
                     dp_matrix[i][j] = dp_matrix[i-1][j-1] + 1
                 else:
-                    dp_matrix[i][j] = max(dp_matrix[i-1][j-1],dp_matrix[i-1][j],dp_matrix[i][j-1])
+                    dp_matrix[i][j] = max(dp_matrix[i-1][j],dp_matrix[i][j-1])
 
 
         return dp_matrix[-1][-1]
