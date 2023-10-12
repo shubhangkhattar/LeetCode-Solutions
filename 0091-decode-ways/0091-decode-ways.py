@@ -1,21 +1,22 @@
 class Solution:
     def numDecodings(self, s: str) -> int:
-
-        dp = {len(s) : 1}
-
-        def dfs(i):
-            if i in dp:
-                return dp[i]
-            if s[i] == "0":
+        
+        dp_array = {len(s) : 1}
+        
+        def dfs(index):
+            if index in dp_array:
+                return dp_array[index] 
+            if s[index] == "0":
                 return 0
+
+            res = dfs(index + 1)
+
+            if index+1 < len(s) and (s[index] == "1" or s[index] == "2" and s[index+1] in "0123456"):
+                res += dfs(index+2)
             
-            res = dfs(i+1)
-
-            if i + 1 < len(s) and (s[i] == "1" or s[i] == "2" and s[i+1] in "0123456"):
-                res += dfs(i+2)
-
-            dp[i] = res
+            dp_array[index] = res
 
             return res
 
         return dfs(0)
+
