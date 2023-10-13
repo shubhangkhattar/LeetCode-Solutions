@@ -1,37 +1,38 @@
 from collections import defaultdict
-from typing import List
-
-# Youtube Link : https://www.youtube.com/watch?v=-Me_If-_jRs&t=579s&ab_channel=KeetCode%28Ex-Amazon%29
 
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        pre = defaultdict(list)
-        taken = set()
+        pre_map = defaultdict(list)
+        visited = set()
 
-        for course, p in prerequisites:
-            pre[course].append(p)
-
+        for course in prerequisites:
+            pre_map[course[0]].append(course[1])
 
         def dfs(course):
-            if not pre[course]:
-                return True
 
-            if course in taken:
+            if not pre_map[course]:
+                return True
+            
+            if course in visited:
                 return False
 
-            taken.add(course)
+            visited.add(course)
 
-            for p in pre[course]:
-                if not dfs(p):
+            for pre_course in pre_map[course]:
+                if dfs(pre_course):
+                    pre_map[course].remove(pre_course)
+                else:
                     return False
-
-            pre[course] = []
+            
+            visited.remove(course)
 
             return True
 
-        for course in range(numCourses):
-            if not dfs(course):
+        for i in range(numCourses):
+            if not dfs(i):
                 return False
-
+            
         return True
+
+
 
